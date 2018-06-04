@@ -581,7 +581,7 @@ def geogareaweighting2D(nlat, nlong, bespokelatmidpoints, bespokelongmidpoints, 
             nanmat[i,0] = (np.sin(np.deg2rad(lats1[i]+d))-np.sin(np.deg2rad(lats1[i]-d))) / np.sin(np.deg2rad(2*d))
     elif optA == 2:
         for i in range(lats1.shape[0]):
-            nanmat[i,0] = np.sin(np.deg2rad(lats1[i]+d))-np.sin(np.deg2rad(lats1[i]-d))
+            nanmat[i,0] = (np.sin(np.deg2rad(lats1[i]+d))-np.sin(np.deg2rad(lats1[i]-d)))*(2*np.pi*6371)
     elif optA == 3:
         for i in range(lats1.shape[0]):
             nanmat[i,0] = np.cos(np.deg2rad(lats1[i]))
@@ -753,9 +753,9 @@ def ocean_basin_mask(interp_mask, nlat, nlong, depth, optA, optB):
     return interp_mask6
 #******************************************************************************
 def latitudeband_mask(latnorth, latsouth, lats, longs, nlats, nlongs, depth):
-    #latitudeband_mask(latnorth, latsouth, lats, longs, 0 , 0)
+    #latitudeband_mask(latnorth, latsouth, lats, longs, 0 , 0, 1)
     #does not calculate it's own cell midpoints
-    #latitudeband_mask(latnorth, latsouth, 0, 0, 64 , 128)
+    #latitudeband_mask(latnorth, latsouth, 0, 0, 64 , 128, 1)
     #does calculate it's own cell midpoints of nlat = 64 nlong = 128
     #latnorth = lats north of here are masked out
     #latsouth = lats south of here are masked out
